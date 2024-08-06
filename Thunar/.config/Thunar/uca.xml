@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>Terminal</icon>
+	<name>Open in Terminal</name>
+	<submenu></submenu>
+	<unique-id>1722330758419201-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Open terminal in the selected folder</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>folder</icon>
+	<name>Open as Root</name>
+	<submenu></submenu>
+	<unique-id>1722330758419368-2</unique-id>
+	<command>pkexec thunar %F</command>
+	<description>Open the folder with administration privileges</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>emblem-symbolic-link</icon>
+	<name>Create Symbolic Link(s)</name>
+	<submenu></submenu>
+	<unique-id>1722330758419528-3</unique-id>
+	<command>mkdir symbolic_links &amp;&amp; ln -s -t symbolic_links %F</command>
+	<description>Create a symbolic link for each selected item</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>link</icon>
+	<name>Create Hard Link(s)</name>
+	<submenu></submenu>
+	<unique-id>1722979592371905-1</unique-id>
+	<command>mkdir hard_links &amp;&amp; ln -t hard_links %F</command>
+	<description>Create a hard link for each selected item</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>application-certificate</icon>
+	<name>Verify</name>
+	<submenu></submenu>
+	<unique-id>1722330758419583-4</unique-id>
+	<command>mint-iso-verify %f</command>
+	<description>Verify the authenticity and integrity of the image</description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>gtk-find</icon>
+	<name>Search</name>
+	<submenu></submenu>
+	<unique-id>1722330758419747-5</unique-id>
+	<command>catfish %f</command>
+	<description>Search for Files</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+</actions>
