@@ -39,6 +39,7 @@ INSTALL["core"] = [
     "xfdashboard-plugins",
     "etckeeper",
     "stow",
+    "rofi",
 ]
 
 INSTALL["virtualization"] = [
@@ -50,6 +51,7 @@ INSTALL["virtualization"] = [
     "virt-manager",
     "virt-viewer",
     "libguestfs-tools",
+    "virtiofsd",
 ]
 
 INSTALL["code"] = [
@@ -122,14 +124,15 @@ def update_ppas(ppas: list):
         subprocess.run(ppa_cmd, check=True)
 
 
-def install(installs: dict):
+def install(installs: dict, first_time: bool):
     """Install the packages defined"""
     subprocess.run(["sudo", "apt-get", "update"], check=True)
     packages = [pkg for install_list in installs.values() for pkg in install_list]
     install_cmd = ["sudo", "apt-get", "install"] + packages
     subprocess.run(install_cmd, check=True)
 
-    subprocess.run(["./install_fisher.fish"], check=True)
+    if first_time:
+        subprocess.run(["./install_fisher.fish"], check=True)
 
 
 def manual_install(manual_install_links: list):
@@ -138,20 +141,20 @@ def manual_install(manual_install_links: list):
     subprocess.run(manual_install_cmd, check=True)
 
 
-def main(update_ppa: bool):
+def main(first_time: bool):
     """Entry point"""
     purge(PURGE)
 
     # NOTE: This is only needed once
-    if update_ppa:
+    if first_time:
         update_ppas(PPAS)
 
-    install(INSTALL)
+    install(INSTALL, first_time)
     manual_install(MANUAL_INSTALL_LINKS)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--ppa", action="store_true")
+    parser.add_argument("--first_time", action="store_true")
     args = parser.parse_args()
-    main(args.ppa)
+    main(args.first_time)
