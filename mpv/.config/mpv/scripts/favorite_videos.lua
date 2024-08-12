@@ -5,8 +5,6 @@ local WATCHED_FILE = ".watched.txt"
 local DELETE_FILE = ".delete.txt"
 
 local CURRENT_PATH = ""
-local CURRENT_DIR = ""
-local CURRENT_NAME = ""
 
 local function append_file(filename, str)
     local file = io.open(filename, "a")
@@ -14,10 +12,11 @@ local function append_file(filename, str)
     file:close()
 end
 
-local function append_video_to_file(file)
-    local path = CURRENT_PATH
-    local name = CURRENT_NAME
-    append_file(file, string.format("%s\n", path))
+local function append_video_to_file(target_file)
+    dir, name = utils.split_path(CURRENT_PATH)
+    file = utils.join_path(dir, target_file)
+
+    append_file(file, string.format("%s\n", name))
     mp.osd_message(string.format("'%s'\n >> %s", name, file))
     print(string.format("[INFO] '%s' >> %s", name, file))
 end
@@ -36,7 +35,6 @@ end
 
 local function on_load(event)
     CURRENT_PATH = mp.get_property("path")
-    CURRENT_DIR, CURRENT_NAME = utils.split_path(CURRENT_PATH)
     print(string.format("[INFO] Current open video path: '%s'", CURRENT_PATH))
 end
 
