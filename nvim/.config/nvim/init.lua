@@ -9,4 +9,4 @@
 require('settings')
 require('maps')
 require('functions')
-require('plugins')
+-- require('plugins')
